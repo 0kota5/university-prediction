@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大学予測とおみくじ</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 500px; margin: 0 auto; background-color: #f9f9f9; }
+        h1 { text-align: center; color: #333; font-size: 24px; }
+        .tabs { display: flex; margin-bottom: 20px; }
+        .tab-btn { flex: 1; padding: 10px; text-align: center; background: #ddd; cursor: pointer; border: none; font-size: 16px; }
+        .tab-btn.active { background: #3b82f6; color: white; font-weight: bold; }
+        .panel { display: none; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .panel.active { display: block; }
+        button.action-btn { width: 100%; padding: 12px; background-color: #2563eb; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; margin-top: 15px; }
+        button.action-btn:hover { background-color: #1d4ed8; }
+        .result-box { margin-top: 20px; padding: 15px; background: #f0fdf4; border-left: 4px solid #16a34a; border-radius: 4px; display: none; white-space: pre-wrap; font-size: 16px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+    <h1>大学予測とおみくじ</h1>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('univ')">1. 大学予測サイト</button>
+        <button class="tab-btn" onclick="switchTab('omikuji')">2. 今日のおみくじ</button>
+    </div>
+
+    <!-- 1. 大学予測サイト -->
+    <div id="univ-panel" class="panel active">
+        <p style="font-size: 16px; color: #555;">ボタンを押して将来を予測しよう！</p>
+        <div id="univ-init" style="white-space: pre-wrap; background: #eee; padding: 15px; border-radius: 4px; font-size: 16px; line-height: 1.6;">高校生はやってみて&#10;&#10;あなたが将来進学する大学を予測します&#10;&#10;予測対象：早稲田、阪大、立教、東大、学習院</div>
+        <button class="action-btn" onclick="predictUniv()">大学を予測する！</button>
+        <div id="univ-result" class="result-box"></div>
+    </div>
+
+    <!-- 2. 今日のおみくじ -->
+    <div id="omikuji-panel" class="panel">
+        <p style="font-size: 16px; color: #555;">今日のおみくじ<br>ボタンを押して今日の運勢を占おう！</p>
+        <button class="action-btn" style="background-color: #4b5563;" onclick="playOmikuji()">おみくじを引く</button>
+        <div id="omikuji-result" class="result-box"></div>
+    </div>
+
+    <script>
+        const univList = ["早稲田", "阪大", "立教", "東大", "学習院"];
+        const omikujiList = ["大吉", "吉", "中吉", "小吉", "凶"];
+
+        function switchTab(type) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            if(type === 'univ') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                document.getElementById('univ-panel').classList.add('active');
+            } else {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                document.getElementById('omikuji-panel').classList.add('active');
+            }
+        }
+
+        function predictUniv() {
+            const result = univList[Math.floor(Math.random() * univList.length)];
+            const box = document.getElementById('univ-result');
+            box.innerText = "高校生はやってみて\n\nあなたが将来進学する大学を予測します\n\n予測対象：早稲田、阪大、立教、東大、学習院\n\n予測結果：あなたが将来進学する大学は  " + result + "  です！";
+            box.style.display = "block";
+        }
+
+        function playOmikuji() {
+            const result = omikujiList[Math.floor(Math.random() * omikuji_list = omikujiList.length ? omikujiList : ["大吉", "吉", "中吉"])];
+            const finalResult = omikujiList[Math.floor(Math.random() * omikujiList.length)];
+            const box = document.getElementById('omikuji-result');
+            box.innerText = "今日のおみくじ\n\nボタンを押して今日の運勢を占おう！\n\n結果： 【 " + finalResult + " 】 です";
+            box.style.display = "block";
+        }
+    </script>
+</body>
+</html>
