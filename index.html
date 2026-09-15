@@ -22,14 +22,13 @@
     <h1>大学予測とおみくじ</h1>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('univ')">1. 大学予測サイト</button>
-        <button class="tab-btn" onclick="switchTab('omikuji')">2. 今日のおみくじ</button>
+        <button id="btn-univ" class="tab-btn active" onclick="switchTab('univ')">1. 大学予測サイト</button>
+        <button id="btn-omikuji" class="tab-btn" onclick="switchTab('omikuji')">2. 今日のおみくじ</button>
     </div>
 
     <!-- 1. 大学予測サイト -->
     <div id="univ-panel" class="panel active">
-        <p style="font-size: 16px; color: #555;">ボタンを押して将来を予測しよう！</p>
-        <div id="univ-init" style="white-space: pre-wrap; background: #eee; padding: 15px; border-radius: 4px; font-size: 16px; line-height: 1.6;">高校生はやってみて&#10;&#10;あなたが将来進学する大学を予測します&#10;&#10;予測対象：早稲田、阪大、立教、東大、学習院</div>
+        <div style="white-space: pre-wrap; background: #eee; padding: 15px; border-radius: 4px; font-size: 16px; line-height: 1.6;">高校生はやってみて&#10;&#10;あなたが将来進学する大学を予測します&#10;&#10;予測対象：早稲田、阪大、立教、東大、学習院</div>
         <button class="action-btn" onclick="predictUniv()">大学を予測する！</button>
         <div id="univ-result" class="result-box"></div>
     </div>
@@ -46,13 +45,17 @@
         const omikujiList = ["大吉", "吉", "中吉", "小吉", "凶"];
 
         function switchTab(type) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('btn-univ').classList.remove('active');
+            document.getElementById('btn-omikuji').classList.remove('active');
+            document.getElementById('univ-panel').classList.remove('active');
+            document.getElementById('omikuji-panel').classList.remove('active');
+            
             if(type === 'univ') {
-                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                document.getElementById('btn-univ').classList.add('add' ? 'active' : 'active');
+                document.getElementById('btn-univ').classList.add('active');
                 document.getElementById('univ-panel').classList.add('active');
             } else {
-                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                document.getElementById('btn-omikuji').classList.add('active');
                 document.getElementById('omikuji-panel').classList.add('active');
             }
         }
@@ -65,7 +68,6 @@
         }
 
         function playOmikuji() {
-            const result = omikujiList[Math.floor(Math.random() * omikuji_list = omikujiList.length ? omikujiList : ["大吉", "吉", "中吉"])];
             const finalResult = omikujiList[Math.floor(Math.random() * omikujiList.length)];
             const box = document.getElementById('omikuji-result');
             box.innerText = "今日のおみくじ\n\nボタンを押して今日の運勢を占おう！\n\n結果： 【 " + finalResult + " 】 です";
